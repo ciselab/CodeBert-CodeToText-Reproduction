@@ -25,7 +25,10 @@ COPY . .
 #RUN pip3 update
 #RUN pip3 install -r requirements.txt
 
+RUN ~/anaconda/bin/conda update --all
 RUN ~/anaconda/bin/conda env create -f environment.yml
+
+RUN mv run.sh ./code/
 
 RUN cd code
 
@@ -43,4 +46,5 @@ ENV test_file $data_dir/$lang/test_minimal.jsonl
 ENV epochs 10 
 ENV pretrained_model microsoft/codebert-base #Roberta: roberta-base
 
-ENTRYPOINT [run.sh]
+
+ENTRYPOINT ["bash","run.sh"]

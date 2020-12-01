@@ -4,33 +4,16 @@ channels:
   - defaults
 dependencies:
   - _r-xgboost-mutex=2.0=cpu_0
-  - brotlipy=0.7.0=py37h395d20d_1001
-  - ca-certificates=2020.11.8=h033912b_0
-  - certifi=2020.11.8=py37hf985489_0
-  - cffi=1.14.4=py37hc5b2277_1
-  - chardet=3.0.4=py37h2987424_1008
-  - cryptography=3.2.1=py37h3b7a55b_0
-  - idna=2.10=pyh9f0ad1d_0
-  - libcxx=11.0.0=h4c3b8ed_1
-  - libffi=3.3=h74dc148_1
-  - ncurses=6.2=h2e338ed_4
-  - openssl=1.1.1h=haf1e3a3_0
-  - pip=20.3=pyhd8ed1ab_0
-  - pycparser=2.20=pyh9f0ad1d_2
-  - pyopenssl=20.0.0=pyhd8ed1ab_0
-  - pysocks=1.7.1=py37h2987424_2
-  - python=3.7.9=h26836e1_0
-  - python_abi=3.7=1_cp37m
-  - readline=8.0=h0678c8f_2
-  - requests=2.25.0=pyhd3deb0d_0
-  - setuptools=49.6.0=py37h2987424_2
-  - six=1.15.0=pyh9f0ad1d_0
-  - sqlite=3.33.0=h960bd1c_1
-  - tk=8.6.10=hb0a8c7a_1
-  - tqdm=4.51.0=pyhd3eb1b0_0
-  - wheel=0.35.1=pyh9f0ad1d_0
-  - xz=5.2.5=haf1e3a3_1
-  - zlib=1.2.11=h7795811_1010
+  - idna=2.10
+  - pip=20.3
+  - pycparser=2.20
+  - pyopenssl=20.0.0
+  - python_abi=3.7
+  - requests=2.25.0
+  - six=1.15.0
+  - tqdm=4.51.0
+  - wheel=0.35.1
+  - pytorch=1.4.0
   - pip:
     - click==7.1.2
     - filelock==3.0.12
@@ -43,7 +26,6 @@ dependencies:
     - sacremoses==0.0.43
     - sentencepiece==0.1.91
     - tokenizers==0.9.3
-    - torch==1.4.0
     - transformers==3.5.0
     - urllib3==1.26.2
 prefix: /Users/lapplis/.conda/envs/code-to-text
