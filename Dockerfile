@@ -29,7 +29,7 @@ WORKDIR /experiment/code
 
 # Be careful to not add comments after the env variables - they will be added to the string 
 
-ENV do_test true
+ENV do_train true
 ENV do_val true
 ENV do_test true
 
