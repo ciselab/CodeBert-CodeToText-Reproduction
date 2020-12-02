@@ -23,9 +23,11 @@ COPY . .
 RUN ~/anaconda/bin/conda update --all
 RUN ~/anaconda/bin/conda env create -f environment.yml
 
-RUN mv run.sh ./code/
+RUN mv entrypoint.sh ./code/
 
 WORKDIR /experiment/code
+
+# Be careful to not add comments after the env variables - they will be added to the string 
 
 ENV lang java
 ENV lr 5e-5
@@ -35,10 +37,10 @@ ENV source_length 256
 ENV target_length 128
 ENV data_dir /dataset
 ENV output_dir model/
-ENV train_file $data_dir/$lang/train_minimal.jsonl
-ENV dev_file $data_dir/$lang/valid_minimal.jsonl
-ENV test_file $data_dir/$lang/test_minimal.jsonl
+ENV train_file $data_dir/train_minimal.jsonl
+ENV dev_file $data_dir/valid_minimal.jsonl
+ENV test_file $data_dir/test_minimal.jsonl
 ENV epochs 10 
 ENV pretrained_model microsoft/codebert-base
 
-ENTRYPOINT ["bash","./run.sh"]
+ENTRYPOINT ["bash","./entrypoint.sh"]

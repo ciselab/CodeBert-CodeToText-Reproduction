@@ -1,8 +1,9 @@
 this file holds the changes applied to the existing project from CodeXGlue
 
 - Added requirements text 
-- Changed cuda.Longtensor to longtensor where necessary
+- Changed cuda.Longtensor to longtensor where necessary (this must have disabled gpu support in total for validation and test)
 - minimal dataset fukes 
 - new git repo
 - gitignored models and datasets
 - make conda env add to git
+- moved old readme to initial readme, started my own
