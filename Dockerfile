@@ -40,7 +40,7 @@ ENV beam_size 10
 ENV source_length 256
 ENV target_length 128
 ENV data_dir /dataset
-ENV output_dir model/
+ENV output_dir /experiment/output
 ENV train_file $data_dir/train_minimal.jsonl
 ENV dev_file $data_dir/valid_minimal.jsonl
 ENV test_file $data_dir/test_minimal.jsonl
