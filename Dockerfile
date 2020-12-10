@@ -29,9 +29,12 @@ WORKDIR /experiment/code
 
 # Be careful to not add comments after the env variables - they will be added to the string 
 
+# These are variables added for reproduction
 ENV do_train true
 ENV do_val true
 ENV do_test true
+
+# These are "vanilla" variables from the initial experiment
 
 ENV lang java
 ENV lr 5e-5
