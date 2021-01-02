@@ -1,9 +1,13 @@
 FROM ubuntu:20.04
 
+# This will create a Timezone, which is required for one of the later apt installs
+ENV TZ=Europe/Amsterdam
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 Run apt-get update
 RUN apt-get install software-properties-common curl wget -y
 # This is a repository for all python builds
-RUN add-apt-repository ppa:deadsnakes/ppa
+RUN add-apt-repository ppa:deadsnakes/ppa -y
 Run apt-get update
 
 RUN apt-get install python3.7 python3-pip -y
@@ -20,7 +24,7 @@ WORKDIR /experiment
 
 COPY . . 
 
-RUN ~/anaconda/bin/conda update --all
+RUN ~/anaconda/bin/conda update --all -y 
 RUN ~/anaconda/bin/conda env create -f environment.yml
 
 RUN mv entrypoint.sh ./code/
