@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  experiment:
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile
+    image: experiment:unstable
+    volumes:
+      - ./dataset/java/:/dataset:ro
+      - ./compose_output:/experiment/output
+    environment:
+      epochs: 10
+      train_file: /dataset/train_minimal.jsonl
+      dev_file: /dataset/valid_minimal.jsonl
+      test_file: /dataset/test_minimal.jsonl
