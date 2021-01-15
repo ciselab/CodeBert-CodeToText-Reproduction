@@ -26,6 +26,7 @@ if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
         --num_train_epochs $epochs
+        --no_cuda
     exit
 fi
 if [ "$do_train" = true -a "$do_val" = true ]; then
@@ -42,6 +43,7 @@ if [ "$do_train" = true -a "$do_val" = true ]; then
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
         --num_train_epochs $epochs
+        --no_cuda
     exit
 fi
 if [ "$do_train" = true -a "$do_test" = true ]; then
@@ -58,6 +60,7 @@ if [ "$do_train" = true -a "$do_test" = true ]; then
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
         --num_train_epochs $epochs
+        --no_cuda
     exit
 fi
 if [ "$do_train" = true ]; then
@@ -75,6 +78,7 @@ if [ "$do_train" = true ]; then
         --eval_batch_size $batch_size \
         --learning_rate $lr \
         --num_train_epochs $epochs
+        --no_cuda
     exit 0
 fi
 if [ "$do_test" = true ]; then
@@ -87,11 +91,9 @@ if [ "$do_test" = true ]; then
         --output_dir $output_dir \
         --max_source_length $source_length \
         --max_target_length $target_length \
-        --beam_size $beam_size \
         --train_batch_size $batch_size \
         --eval_batch_size $batch_size \
-        --learning_rate $lr \
-        --num_train_epochs $epochs
+        --no_cuda
     exit
 fi
 echo "no flags set - please inspect your compose"

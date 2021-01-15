@@ -2,3 +2,5 @@
 .DS_Store
 model
 dataset
+models
+compose_output

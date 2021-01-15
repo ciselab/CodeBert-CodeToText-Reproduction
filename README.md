@@ -19,7 +19,7 @@ After that, change the docker-compose to point to your files (including filename
 You can build the docker file beforehand using 
 
 ```
-docker build . -t ciselab/CodeBERT-Code2Text
+docker build . -t ciselab/codebert-code2text
 ```
 
 Or you can comment-in the build parts in the docker-compose.yml
@@ -53,13 +53,16 @@ For running with podman, make sure to have the output folder created first.
 Everything additionally created for packaging is under the MIT Licence. 
 The original python files from microsoft follow (different) licences, and any changes should be proposed to the CodeBERT repository. 
 
-## Known issues
+## Limitations / Hardware Requirement
 
-Running with a conda environment is not that easy in docker. 
-that's why the entrypoint.sh is running with `conda-run`. 
-`conda-run` buffers the stdout until it fails or is done, making the container mostly silent until it ends. 
-Conda is currently working on addressing this in a beta version.
-I hope I addressed this by now, but if there is such an issue you now know why. 
+For the container to run properly, it needs 15 to 25 gigabyte memory. 
+On our servers, one epoch on the java data takes ~30h. 
+The Containers starts ~20 threads for training and your server should have >20 cores.  
+
+In comparison, training on a RTX 1070 took 7h per epoch. 
+However, mounting GPUs into a container is hard, so its not yet implemented.
+
+## Known issues
 
 The *preprocess.py* in the Dataset.zip sometimes failes to unzip all of the data. 
 If this error occurs, some of the .jsonls will still be gzipped. 

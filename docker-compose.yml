@@ -2,7 +2,11 @@ version: '3.3'
 
 services:
   experiment:
-    image: ciselab/CodeBERT-Code2Text
+    image: ciselab/codebert-code2text
+    cpu_count: 8
+    mem_limit: 32g
+    oom_kill_disable: true
+    oom_score_adj: 500
     volumes:
       - ./dataset/java/:/dataset:ro
       - ./compose_output:/experiment/output
@@ -11,3 +15,4 @@ services:
       train_file: /dataset/train.jsonl
       dev_file: /dataset/valid.jsonl
       test_file: /dataset/test.jsonl
+      batch_size: 8
