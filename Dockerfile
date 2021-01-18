@@ -51,4 +51,7 @@ ENV test_file $data_dir/test_minimal.jsonl
 ENV epochs 10 
 ENV pretrained_model microsoft/codebert-base
 
+ENV load_existing_model false
+ENV load_model_path /models/pytorch_model.bin
+
 ENTRYPOINT ["bash","./entrypoint.sh"]

@@ -18,5 +18,6 @@ services:
       dev_file: /dataset/valid_minimal.jsonl
       test_file: /dataset/test_minimal.jsonl
       no_cuda: "true"
-      #pretrained_model: microsoft/codebert-base
-      pretrained_model: /models/pytorch_model.bin
+      pretrained_model: microsoft/codebert-base
+      load_existing_model: "true"
+      load_model_path: /models/best_pytorch_model.bin

@@ -12,6 +12,100 @@
 # The use of exit without a number returns the exit code of the fore-going statement - that is in this case the anaconda command. 
 # The Exit codes are necessary, as otherwise all cases are run (atleast, all cases with flags set). That would not only take longer, but also overwrite valid artifacts.
 
+if [ "$load_existing_model" = true ]; then 
+    echo "Found flag to load a model under $load_model_path"
+
+    if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
+        echo "performing full run with training, validation and test"
+        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
+            python3.7 ./run.py \
+            --do_train --do_test --do_eval \
+            --model_type roberta --model_name_or_path $pretrained_model \
+            --train_filename $train_file --test_filename $test_file --dev_filename $dev_file \
+            --output_dir $output_dir \
+            --max_source_length $source_length \
+            --max_target_length $target_length \
+            --beam_size $beam_size \
+            --train_batch_size $batch_size --eval_batch_size $batch_size \
+            --learning_rate $lr \
+            --num_train_epochs $epochs \
+            --load_model_path $load_model_path \
+            --no_cuda
+        exit
+    fi
+    if [ "$do_train" = true -a "$do_val" = true ]; then
+        echo "performing run with training and validation"
+        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
+            python3.7 ./run.py \
+            --do_train --do_eval \
+            --model_type roberta --model_name_or_path $pretrained_model \
+            --train_filename $train_file --dev_filename $dev_file \
+            --output_dir $output_dir \
+            --max_source_length $source_length \
+            --max_target_length $target_length \
+            --beam_size $beam_size \
+            --train_batch_size $batch_size --eval_batch_size $batch_size \
+            --learning_rate $lr \
+            --load_model_path $load_model_path \
+            --num_train_epochs $epochs \
+            --no_cuda
+        exit
+    fi
+    if [ "$do_train" = true -a "$do_test" = true ]; then
+        echo "performing run with training and test"
+        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
+            python3.7 ./run.py \
+            --do_train --do_test \
+            --model_type roberta --model_name_or_path $pretrained_model \
+            --train_filename $train_file --test_filename $test_file \
+            --output_dir $output_dir \
+            --max_source_length $source_length \
+            --max_target_length $target_length \
+            --beam_size $beam_size \
+            --train_batch_size $batch_size --eval_batch_size $batch_size \
+            --learning_rate $lr \
+            --num_train_epochs $epochs \
+            --load_model_path $load_model_path \
+            --no_cuda
+        exit
+    fi
+    if [ "$do_train" = true ]; then
+        echo "performing run with (only) training"
+        ~/anaconda/bin/conda run --no-capture-output -n \
+            code-to-text python3.7 ./run.py \
+            --do_train \
+            --model_type roberta --model_name_or_path $pretrained_model \
+            --train_filename $train_file \
+            --output_dir $output_dir \
+            --max_source_length $source_length \
+            --max_target_length $target_length \
+            --beam_size $beam_size \
+            --train_batch_size $batch_size \
+            --eval_batch_size $batch_size \
+            --learning_rate $lr \
+            --num_train_epochs $epochs \
+            --load_model_path $load_model_path \
+            --no_cuda
+        exit 0
+    fi
+    if [ "$do_test" = true ]; then
+        echo "performing run with (only) testing"
+        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
+            python3.7 ./run.py \
+            --do_test \
+            --model_type roberta --model_name_or_path $pretrained_model \
+            --test_filename $test_file \
+            --output_dir $output_dir \
+            --max_source_length $source_length \
+            --max_target_length $target_length \
+            --train_batch_size $batch_size \
+            --eval_batch_size $batch_size \
+            --load_model_path $load_model_path \
+            --no_cuda
+        exit
+    fi
+fi
+
 if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
     echo "performing full run with training, validation and test"
     ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
@@ -25,7 +119,8 @@ if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
         --beam_size $beam_size \
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
+        --load_model_path $load_model_path \
         --no_cuda
     exit
 fi
@@ -42,10 +137,14 @@ if [ "$do_train" = true -a "$do_val" = true ]; then
         --beam_size $beam_size \
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
+        --load_model_path $load_model_path \
         --no_cuda
     exit
 fi
+
+# If there was no model to load specified, train anew
+
 if [ "$do_train" = true -a "$do_test" = true ]; then
     echo "performing run with training and test"
     ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
@@ -59,7 +158,7 @@ if [ "$do_train" = true -a "$do_test" = true ]; then
         --beam_size $beam_size \
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
         --no_cuda
     exit
 fi
@@ -77,7 +176,7 @@ if [ "$do_train" = true ]; then
         --train_batch_size $batch_size \
         --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
         --no_cuda
     exit 0
 fi

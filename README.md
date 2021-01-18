@@ -67,3 +67,7 @@ However, mounting GPUs into a container is hard, so its not yet implemented.
 The *preprocess.py* in the Dataset.zip sometimes failes to unzip all of the data. 
 If this error occurs, some of the .jsonls will still be gzipped. 
 To fix this, simply run `gunzip` on the remaining files and re-run the preprocess.py.
+
+Due to file-locks, it is not possible to use a model OR a dataset at two experiments at the same time. 
+If you want to run two experiments at once using the same model, you need to make a copy.
+A short test from me showed that they give the same results when all parameters are equal.
