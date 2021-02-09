@@ -71,3 +71,17 @@ To fix this, simply run `gunzip` on the remaining files and re-run the preproces
 Due to file-locks, it is not possible to use a model OR a dataset at two experiments at the same time. 
 If you want to run two experiments at once using the same model, you need to make a copy.
 A short test from me showed that they give the same results when all parameters are equal.
+
+
+Another issue is from windows, atleast default windows. 
+if you get an error like 
+```
+CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 2: $'\r': command not found
+CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 4: $'\r': command not found
+CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 8: $'\r': command not found
+CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 11: $'\r': command not found
+CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 14: $'\r': command not found
+CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 200: syntax error: unexpected end of file
+```
+This is due to windows changing the line-breaks / file encodings. Thanks windows. 
+Its might easier/faster to pull the image from this repository, or you have to [edit the entrypoint to be compatible with windows](https://askubuntu.com/questions/966488/how-do-i-fix-r-command-not-found-errors-running-bash-scripts-in-wsl). 
