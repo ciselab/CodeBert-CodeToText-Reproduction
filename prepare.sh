@@ -29,7 +29,7 @@ rm *.pkl
 # Run the preprocessing file, which comes with the dataset.zip
 # The preprocess.py creates the .jsonl files for training, test and validation for all languages
 python preprocess.py
-rm -f */final
+rm -rf */final
 
 # Make the minimal files for java
 cd java
