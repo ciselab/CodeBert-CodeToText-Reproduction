@@ -1,0 +1,13 @@
+click==7.1.2
+filelock==3.0.12
+joblib==0.17.0
+numpy==1.19.3
+packaging==20.4
+protobuf==3.14.0
+pyparsing==2.4.7
+regex==2020.11.13
+sacremoses==0.0.43
+sentencepiece==0.1.91
+tokenizers==0.9.3
+transformers==3.5.0
+urllib3==1.26.2

@@ -8,12 +8,10 @@ dependencies:
   - pip=20.3
   - pycparser=2.20
   - pyopenssl=20.0.0
-  - python_abi=3.7
   - requests=2.25.0
   - six=1.15.0
   - tqdm=4.51.0
   - wheel=0.35.1
-  - pytorch=1.4.0
   - pip:
     - click==7.1.2
     - filelock==3.0.12
@@ -28,4 +26,3 @@ dependencies:
     - tokenizers==0.9.3
     - transformers==3.5.0
     - urllib3==1.26.2
-prefix: /Users/lapplis/.conda/envs/code-to-text

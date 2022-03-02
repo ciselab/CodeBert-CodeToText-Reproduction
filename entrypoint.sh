@@ -17,8 +17,7 @@ if [ "$load_existing_model" = true ]; then
 
     if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
         echo "performing full run with training, validation and test"
-        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-            python3.7 ./run.py \
+        python ./run.py \
             --do_train --do_test --do_eval \
             --model_type roberta --model_name_or_path $pretrained_model \
             --train_filename $train_file --test_filename $test_file --dev_filename $dev_file \
@@ -35,8 +34,7 @@ if [ "$load_existing_model" = true ]; then
     fi
     if [ "$do_train" = true -a "$do_val" = true ]; then
         echo "performing run with training and validation"
-        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-            python3.7 ./run.py \
+        python ./run.py \
             --do_train --do_eval \
             --model_type roberta --model_name_or_path $pretrained_model \
             --train_filename $train_file --dev_filename $dev_file \
@@ -53,8 +51,7 @@ if [ "$load_existing_model" = true ]; then
     fi
     if [ "$do_train" = true -a "$do_test" = true ]; then
         echo "performing run with training and test"
-        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-            python3.7 ./run.py \
+        python ./run.py \
             --do_train --do_test \
             --model_type roberta --model_name_or_path $pretrained_model \
             --train_filename $train_file --test_filename $test_file \
@@ -71,8 +68,7 @@ if [ "$load_existing_model" = true ]; then
     fi
     if [ "$do_train" = true ]; then
         echo "performing run with (only) training"
-        ~/anaconda/bin/conda run --no-capture-output -n \
-            code-to-text python3.7 ./run.py \
+        python ./run.py \
             --do_train \
             --model_type roberta --model_name_or_path $pretrained_model \
             --train_filename $train_file \
@@ -90,8 +86,7 @@ if [ "$load_existing_model" = true ]; then
     fi
     if [ "$do_test" = true ]; then
         echo "performing run with (only) testing"
-        ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-            python3.7 ./run.py \
+        python ./run.py \
             --do_test \
             --model_type roberta --model_name_or_path $pretrained_model \
             --test_filename $test_file \
@@ -108,8 +103,7 @@ fi
 
 if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
     echo "performing full run with training, validation and test"
-    ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-        python3.7 ./run.py \
+    python ./run.py \
         --do_train --do_test --do_eval \
         --model_type roberta --model_name_or_path $pretrained_model \
         --train_filename $train_file --test_filename $test_file --dev_filename $dev_file \
@@ -126,8 +120,7 @@ if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
 fi
 if [ "$do_train" = true -a "$do_val" = true ]; then
     echo "performing run with training and validation"
-    ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-        python3.7 ./run.py \
+    python ./run.py \
         --do_train --do_eval \
         --model_type roberta --model_name_or_path $pretrained_model \
         --train_filename $train_file --dev_filename $dev_file \
@@ -147,8 +140,7 @@ fi
 
 if [ "$do_train" = true -a "$do_test" = true ]; then
     echo "performing run with training and test"
-    ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-        python3.7 ./run.py \
+    python ./run.py \
         --do_train --do_test \
         --model_type roberta --model_name_or_path $pretrained_model \
         --train_filename $train_file --test_filename $test_file \
@@ -164,8 +156,7 @@ if [ "$do_train" = true -a "$do_test" = true ]; then
 fi
 if [ "$do_train" = true ]; then
     echo "performing run with (only) training"
-    ~/anaconda/bin/conda run --no-capture-output -n \
-        code-to-text python3.7 ./run.py \
+    python ./run.py \
         --do_train \
         --model_type roberta --model_name_or_path $pretrained_model \
         --train_filename $train_file \
@@ -182,8 +173,7 @@ if [ "$do_train" = true ]; then
 fi
 if [ "$do_test" = true ]; then
     echo "performing run with (only) testing"
-    ~/anaconda/bin/conda run --no-capture-output -n code-to-text \
-        python3.7 ./run.py \
+    python ./run.py \
         --do_test \
         --model_type roberta --model_name_or_path $pretrained_model \
         --test_filename $test_file \
