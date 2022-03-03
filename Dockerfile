@@ -1,15 +1,8 @@
-#FROM ubuntu:20.04
 FROM nvcr.io/nvidia/pytorch:20.01-py3
-
-# This will create a Timezone, which is required for one of the later apt installs
-ENV TZ=Europe/Amsterdam
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-Run apt-get update
-RUN apt-get install software-properties-common curl wget -y
 
 RUN mkdir /experiment
 RUN mkdir /dataset
+RUN mkdir /models
 
 WORKDIR /experiment
 
@@ -17,6 +10,8 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
+# The "code" folder is copied, and it contains the original CodeBERT Python files 
+# There we put our entrypoint to run the original "run.sh"
 RUN mv entrypoint.sh ./code/
 
 WORKDIR /experiment/code
@@ -42,6 +37,6 @@ ENV epochs 10
 ENV pretrained_model microsoft/codebert-base
 
 ENV load_existing_model false
-ENV load_model_path /models/pytorch_model.bin
+#ENV load_model_path /models/pytorch_model.bin
 
 ENTRYPOINT ["bash","./entrypoint.sh"]

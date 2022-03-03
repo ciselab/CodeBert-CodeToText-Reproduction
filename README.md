@@ -48,10 +48,18 @@ Otherwise, the output will be overwritten.
 I have also tested this to work with podman and podman-compose on debian 10. 
 For running with podman, make sure to have the output folder created first.
 
+## Requirements / Non Docker 
+
+In older versions (1.0) this contained an `environment.yml` and instructions how to run this without docker on your own machine. 
+In theory, this is still possible, but the requirements is (intentionally) reduced to work flawless with the pre-existing dependencies in the container.
+To work, you should be good starting from Python 3.6 and installing Pytorch 1.4. 
+
 ## Licence 
 
 Everything additionally created for packaging is under the MIT Licence. 
 The original python files from microsoft follow (different) licences, and any changes should be proposed to the CodeBERT repository. 
+
+**Important:** The used CUDA Containers come with their own Licence, and should be used carefully. I think they mostly send telemetrics to NVidia, our friendly GPU-monopoly-holding overlords.
 
 ## Limitations / Hardware Requirement
 

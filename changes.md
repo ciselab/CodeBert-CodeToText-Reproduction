@@ -8,3 +8,4 @@ this file holds the changes applied to the existing project from CodeXGlue
 - moved old readme to initial readme, started my own
 - prepare.sh to run the download from initial readme and make minimal datasets
 - Added a switch for model-loading in the entrypoint
+- Moved to Cuda Container, removed conda environment.yml in favour of pip requirements.txt

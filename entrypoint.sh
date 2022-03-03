@@ -10,7 +10,13 @@
 # Anacondas "-n" parameter specifies which conda-env is used to run the script. It must match the name provided in 'environment.yml'.
 
 # The use of exit without a number returns the exit code of the fore-going statement - that is in this case the anaconda command. 
-# The Exit codes are necessary, as otherwise all cases are run (atleast, all cases with flags set). That would not only take longer, but also overwrite valid artifacts.
+# The Exit codes are necessary, as otherwise all cases are run (atleast, all cases with flags set). 
+# That would not only take longer, but also overwrite valid artifacts. Do not remove exits!
+
+
+# ============================================
+#        Case 1: Pretrained Model 
+# ============================================
 
 if [ "$load_existing_model" = true ]; then 
     echo "Found flag to load a model under $load_model_path"
@@ -101,6 +107,10 @@ if [ "$load_existing_model" = true ]; then
     fi
 fi
 
+# ============================================
+#        Case 2: No Pretrained Model 
+# ============================================
+
 if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
     echo "performing full run with training, validation and test"
     python ./run.py \
@@ -114,7 +124,6 @@ if [ "$do_train" = true -a "$do_test" = true -a "$do_val" = true ]; then
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
         --num_train_epochs $epochs \
-        --load_model_path $load_model_path \
         --no_cuda
     exit
 fi
@@ -131,12 +140,9 @@ if [ "$do_train" = true -a "$do_val" = true ]; then
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
         --num_train_epochs $epochs \
-        --load_model_path $load_model_path \
         --no_cuda
     exit
 fi
-
-# If there was no model to load specified, train anew
 
 if [ "$do_train" = true -a "$do_test" = true ]; then
     echo "performing run with training and test"
@@ -185,5 +191,8 @@ if [ "$do_test" = true ]; then
         --no_cuda
     exit
 fi
+
+# Case 3: Error / Unknown 
+
 echo "no flags set - please inspect your compose"
 exit 1
