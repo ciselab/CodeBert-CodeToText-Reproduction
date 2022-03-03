@@ -2,8 +2,7 @@
 
 This repository holds a docker image which reproduces [Microsofts CodeBERT Code-To-Text Experiment](https://github.com/microsoft/CodeXGLUE/tree/main/Code-Text/code-to-text).
 
-The subparts have been minimally changed (see [changes](./changes.md)), but mostly it is just wrapping the experiment in a cpu-based docker image. 
-There is currently no GPU-Image.
+The subparts have been minimally changed (see [changes](./changes.md)), but mostly it is just wrapping the experiment in a docker-image.
 
 The initial readme can be [found here](./initial_readme.md).
 
@@ -13,6 +12,9 @@ Download the dataset using the instructions in the [initial readme](./initial_re
 The shell file runs the instructions from the initial readme and adds some more commands to create the *minimal files* required for *docker-compose-minimal.yml*. 
 It worked flawlessly for me on a mac, so I did not want to make extra docker image for data-preprocessing. 
 Depending on your distribution, you might need to install things like wget.
+
+**Note:** The step before is necessary! the `dataset.zip` only contains references to the dataset and is *unfolded* in `prepare.sh`. 
+
 
 After that, change the docker-compose to point to your files (including filenames) and set environment variables as fit. 
 
@@ -92,4 +94,5 @@ CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 14: $'\r': command n
 CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 200: syntax error: unexpected end of file
 ```
 This is due to windows changing the line-breaks / file encodings. Thanks windows. 
+**Easy Solution**: run `dos2unix entrypoint.sh` and rebuild the container. 
 Its might easier/faster to pull the image from this repository, or you have to [edit the entrypoint to be compatible with windows](https://askubuntu.com/questions/966488/how-do-i-fix-r-command-not-found-errors-running-bash-scripts-in-wsl). 

@@ -15,7 +15,7 @@ services:
       do_train: "false"
       do_val: "true"
       do_test: "true"
-      dev_file: /dataset/valid_minimal.jsonl
+      valid_file: /dataset/valid_minimal.jsonl
       test_file: /dataset/test_minimal.jsonl
       no_cuda: "true"
       pretrained_model: microsoft/codebert-base

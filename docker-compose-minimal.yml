@@ -9,5 +9,5 @@ services:
     environment:
       epochs: 10
       train_file: /dataset/train_minimal.jsonl
-      dev_file: /dataset/valid_minimal.jsonl
+      valid_file: /dataset/valid_minimal.jsonl
       test_file: /dataset/test_minimal.jsonl

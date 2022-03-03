@@ -22,9 +22,9 @@ WORKDIR /experiment/code
 
 # Be careful to not add comments after the env variables - they will be added to the string 
 
-ENV do_train true
-ENV do_val true
-ENV do_test true
+ENV DO_TRAIN true
+ENV DO_VALID true
+ENV DO_TEST true
 
 ENV lang java
 ENV lr 5e-5
@@ -35,12 +35,12 @@ ENV target_length 128
 ENV data_dir /dataset
 ENV output_dir /experiment/output
 ENV train_file $data_dir/train_minimal.jsonl
-ENV dev_file $data_dir/valid_minimal.jsonl
+ENV valid_file $data_dir/valid_minimal.jsonl
 ENV test_file $data_dir/test_minimal.jsonl
 ENV epochs 10 
 ENV pretrained_model microsoft/codebert-base
 
 ENV load_existing_model false
-#ENV load_model_path /models/pytorch_model.bin
+ENV load_model_path /models/pytorch_model.bin
 
 ENTRYPOINT ["bash","./entrypoint.sh"]
