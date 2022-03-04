@@ -11,3 +11,8 @@ services:
       train_file: /dataset/train_minimal.jsonl
       valid_file: /dataset/valid_minimal.jsonl
       test_file: /dataset/test_minimal.jsonl
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]

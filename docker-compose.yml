@@ -16,3 +16,9 @@ services:
       valid_file: /dataset/valid.jsonl
       test_file: /dataset/test.jsonl
       batch_size: 8
+      
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
