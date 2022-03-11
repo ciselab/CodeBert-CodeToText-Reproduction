@@ -95,3 +95,11 @@ CodeBert_CodeToText_Experiment_0_1  | ./entrypoint.sh: line 200: syntax error: u
 This is due to windows changing the line-breaks / file encodings. Thanks windows. 
 **Easy Solution**: run `dos2unix entrypoint.sh` and rebuild the container. 
 Its might easier/faster to pull the image from this repository, or you have to [edit the entrypoint to be compatible with windows](https://askubuntu.com/questions/966488/how-do-i-fix-r-command-not-found-errors-running-bash-scripts-in-wsl). 
+
+```
+xxx | RuntimeError: CUDA out of memory. Tried to allocate 62.00 MiB (GPU 0; 12.00 GiB total capacity; 10.57 GiB already allocated; 0 bytes free; 10.71 GiB reserved in total by PyTorch)
+```
+
+This happens in old Pytorch versions. 
+
+Reduce batch size. To the best of my knowledge, nothing else can be done about this in old pytorch versions.
