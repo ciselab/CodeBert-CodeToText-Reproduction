@@ -30,7 +30,8 @@ if [ "$load_existing_model" = true ]; then
             --train_batch_size $batch_size --eval_batch_size $batch_size \
             --learning_rate $lr \
             --num_train_epochs $epochs \
-            --load_model_path $load_model_path
+            --load_model_path $load_model_path \
+            --seed $seed
         exit
     fi
     if [ "$DO_TRAIN" = true -a "$DO_VALID" = true ]; then
@@ -46,7 +47,8 @@ if [ "$load_existing_model" = true ]; then
             --train_batch_size $batch_size --eval_batch_size $batch_size \
             --learning_rate $lr \
             --load_model_path $load_model_path \
-            --num_train_epochs $epochs
+            --num_train_epochs $epochs \
+            --seed $seed
         exit
     fi
     if [ "$DO_TRAIN" = true -a "$DO_TEST" = true ]; then
@@ -62,7 +64,8 @@ if [ "$load_existing_model" = true ]; then
             --train_batch_size $batch_size --eval_batch_size $batch_size \
             --learning_rate $lr \
             --num_train_epochs $epochs \
-            --load_model_path $load_model_path
+            --load_model_path $load_model_path \
+            --seed $seed
         exit
     fi
     if [ "$DO_TRAIN" = true ]; then
@@ -79,7 +82,8 @@ if [ "$load_existing_model" = true ]; then
             --eval_batch_size $batch_size \
             --learning_rate $lr \
             --num_train_epochs $epochs \
-            --load_model_path $load_model_path
+            --load_model_path $load_model_path \
+            --seed $seed
         exit 0
     fi
     if [ "$DO_TEST" = true ]; then
@@ -93,7 +97,8 @@ if [ "$load_existing_model" = true ]; then
             --max_target_length $target_length \
             --train_batch_size $batch_size \
             --eval_batch_size $batch_size \
-            --load_model_path $load_model_path
+            --load_model_path $load_model_path \
+            --seed $seed
         exit
     fi
 fi
@@ -114,7 +119,8 @@ if [ "$DO_TRAIN" = true -a "$DO_TEST" = true -a "$DO_VALID" = true ]; then
         --beam_size $beam_size \
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
+        --seed $seed
     exit
 fi
 if [ "$DO_TRAIN" = true -a "$DO_VALID" = true ]; then
@@ -129,7 +135,8 @@ if [ "$DO_TRAIN" = true -a "$DO_VALID" = true ]; then
         --beam_size $beam_size \
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
+        --seed $seed
     exit
 fi
 
@@ -145,7 +152,8 @@ if [ "$DO_TRAIN" = true -a "$DO_TEST" = true ]; then
         --beam_size $beam_size \
         --train_batch_size $batch_size --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
+        --seed $seed
     exit
 fi
 if [ "$DO_TRAIN" = true ]; then
@@ -161,7 +169,8 @@ if [ "$DO_TRAIN" = true ]; then
         --train_batch_size $batch_size \
         --eval_batch_size $batch_size \
         --learning_rate $lr \
-        --num_train_epochs $epochs
+        --num_train_epochs $epochs \
+        --seed $seed
     exit 0
 fi
 if [ "$DO_TEST" = true ]; then
@@ -174,7 +183,8 @@ if [ "$DO_TEST" = true ]; then
         --max_source_length $source_length \
         --max_target_length $target_length \
         --train_batch_size $batch_size \
-        --eval_batch_size $batch_size
+        --eval_batch_size $batch_size \
+        --seed $seed
     exit
 fi
 

@@ -103,7 +103,7 @@ To fine-tune encoder-decoder on the dataset
 
 ```shell
 cd code
-lang=java #programming language
+lang=python #programming language
 lr=5e-5
 batch_size=32
 beam_size=10
@@ -111,9 +111,9 @@ source_length=256
 target_length=128
 data_dir=../dataset
 output_dir=model/$lang
-train_file=$data_dir/$lang/train_minimal.jsonl
-dev_file=$data_dir/$lang/valid_minimal.jsonl
-test_file=$data_dir/$lang/test_minimal.jsonl
+train_file=$data_dir/$lang/train.jsonl
+dev_file=$data_dir/$lang/valid.jsonl
+test_file=$data_dir/$lang/test.jsonl
 epochs=10 
 pretrained_model=microsoft/codebert-base #Roberta: roberta-base
 
@@ -125,7 +125,8 @@ python run.py --do_train --do_test --do_eval --model_type roberta --model_name_o
 
 ```shell
 batch_size=64
-dev_file=$data_dir/$lang/valid.jsonl
+dev_file=$data_dir/$lang
+/valid.jsonl
 test_file=$data_dir/$lang/test.jsonl
 test_model=$output_dir/checkpoint-best-bleu/pytorch_model.bin #checkpoint for test
 

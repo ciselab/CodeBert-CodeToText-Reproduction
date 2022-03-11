@@ -70,7 +70,6 @@ On our servers, one epoch on the java data takes ~30h.
 The Containers starts ~20 threads for training and your server should have >20 cores.  
 
 In comparison, training on a RTX 1070 took 7h per epoch. 
-However, mounting GPUs into a container is hard, so its not yet implemented.
 
 ## Known issues
 

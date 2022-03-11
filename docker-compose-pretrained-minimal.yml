@@ -21,3 +21,8 @@ services:
       pretrained_model: microsoft/codebert-base
       load_existing_model: "true"
       load_model_path: /models/best_pytorch_model.bin
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]

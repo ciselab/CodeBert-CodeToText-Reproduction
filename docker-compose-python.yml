@@ -1,21 +1,19 @@
 version: '3.3'
 
 services:
-  experiment:
-    image: ciselab/codebert-code2text
-    cpu_count: 8
-    mem_limit: 32g
-    oom_kill_disable: true
-    oom_score_adj: 500
+  python-codebert-training:
+    image: ciselab/codebert-code2text:1.3
     volumes:
       - ./dataset/java/:/dataset:ro
       - ./compose_output:/experiment/output
     environment:
       epochs: 5
+      lang: python
       train_file: /dataset/train.jsonl
       valid_file: /dataset/valid.jsonl
       test_file: /dataset/test.jsonl
-      batch_size: 32
+      batch_size: 16
+    oom_kill_disable: true
     deploy:
       resources:
         reservations:
