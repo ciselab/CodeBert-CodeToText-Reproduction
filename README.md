@@ -21,7 +21,7 @@ After that, change the docker-compose to point to your files (including filename
 You can build the docker file beforehand using 
 
 ```
-docker build . -t ciselab/codebert-code2text
+docker build . -t ciselab/codebert-code2text:1.3 -t ciselab/codebert-code2text:latest
 ```
 
 Or you can comment-in the build parts in the docker-compose.yml
@@ -33,7 +33,7 @@ docker-compose up
 ```
 
 To verify that all your compose attributes are set correctly, I recommend to run first on a reduced set (e.g. 5 lines per file). 
-This is represented in the *docker-compose-minimal.yml*.
+This is represented in the *docker-compose-minimal.yml*. It should take less than 30 minutes to give you an overview.
 
 
 ```
@@ -84,14 +84,14 @@ The *preprocess.py* in the Dataset.zip sometimes failes to unzip all of the data
 If this error occurs, some of the .jsonls will still be gzipped. 
 To fix this, simply run `gunzip` on the remaining files and re-run the preprocess.py.
 
-====================================================================================
+------
+
 
 Due to file-locks, it is not possible to use a model OR a dataset at two experiments at the same time. 
 If you want to run two experiments at once using the same model, you need to make a copy.
 A short test from me showed that they give the same results when all parameters are equal.
 
-
-====================================================================================
+------
 
 Another issue is from windows, atleast default windows. 
 if you get an error like 
@@ -108,7 +108,7 @@ This is due to windows changing the line-breaks / file encodings. Thanks windows
 Its might easier/faster to pull the image from this repository, or you have to [edit the entrypoint to be compatible with windows](https://askubuntu.com/questions/966488/how-do-i-fix-r-command-not-found-errors-running-bash-scripts-in-wsl). 
 
 
-====================================================================================
+------
 
 ```
 xxx | RuntimeError: CUDA out of memory. Tried to allocate 62.00 MiB (GPU 0; 12.00 GiB total capacity; 10.57 GiB already allocated; 0 bytes free; 10.71 GiB reserved in total by PyTorch)
@@ -118,7 +118,7 @@ This happens in old Pytorch versions.
 
 Reduce batch size. To the best of my knowledge, nothing else can be done about this in old pytorch versions.
 
-====================================================================================
+------
 
 Another thing that can happen is that the container stops after printing "starting epoch" like such: 
 

@@ -7,7 +7,7 @@ services:
       - ./dataset/java/:/dataset:ro
       - ./compose_output:/experiment/output
     environment:
-      epochs: 5
+      epochs: 10
       train_file: /dataset/train.jsonl
       valid_file: /dataset/valid.jsonl
       test_file: /dataset/test.jsonl
@@ -16,4 +16,6 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
