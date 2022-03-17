@@ -11,7 +11,6 @@ class Seq2Seq(nn.Module):
         Build Seqence-to-Sequence.
         
         Parameters:
-
         * `encoder`- encoder of seq2seq model. e.g. roberta
         * `decoder`- decoder of seq2seq model. e.g. transformer
         * `config`- configuration of encoder model. 
@@ -73,9 +72,8 @@ class Seq2Seq(nn.Module):
             return outputs
         else:
             #Predict 
-            preds=[]
-            #zero=torch.cuda.LongTensor(1).fill_(0)
-            zero=torch.LongTensor(1).fill_(0)
+            preds=[]       
+            zero=torch.cuda.LongTensor(1).fill_(0)     
             for i in range(source_ids.shape[0]):
                 context=encoder_output[:,i:i+1]
                 context_mask=source_mask[i:i+1,:]
@@ -108,9 +106,7 @@ class Seq2Seq(nn.Module):
 class Beam(object):
     def __init__(self, size,sos,eos):
         self.size = size
-        #TODO: Make tt with switch on version
-        #self.tt = torch.cuda
-        self.tt = torch
+        self.tt = torch.cuda
         # The score for each translation on the beam.
         self.scores = self.tt.FloatTensor(size).zero_()
         # The backpointers at each time-step.
@@ -138,12 +134,9 @@ class Beam(object):
         """
         Given prob over words for every last beam `wordLk` and attention
         `attnOut`: Compute and update the beam search.
-
         Parameters:
-
         * `wordLk`- probs of advancing from the last step (K x words)
         * `attnOut`- attention at the last step
-
         Returns: True if beam search is complete.
         """
         numWords = wordLk.size(1)
@@ -219,4 +212,3 @@ class Beam(object):
                 tokens.append(tok)
             sentence.append(tokens)
         return sentence
-        
