@@ -66,10 +66,17 @@ The original python files from microsoft follow (different) licences, and any ch
 ## Limitations / Hardware Requirement
 
 For the container to run properly, it needs 15 to 25 gigabyte memory. 
-On our servers, one epoch on the java data takes ~30h. 
+On our servers, one cpu epoch on the java data takes ~30h. 
 The Containers starts ~20 threads for training and your server should have >20 cores.  
 
 In comparison, training on a RTX 1070 took 7h per epoch. 
+Training on a 3080ti took 6h per epoch. 
+Training on an A40 took ~3h per epoch. In general, GPU tries to allocate around 12gb of memory. 
+
+In general, despite being a good first step, GPU Containers turned out to be quite fragile. 
+We have seen multiple problems with Framework-Versions, Hardware and OS combinations. 
+If you intend to reproduce the experiments, we recommend the CPU way for slow but steady progress, 
+and to figure out your own GPU configuration if you intend to do actual changes.
 
 ## Known issues
 
@@ -77,10 +84,14 @@ The *preprocess.py* in the Dataset.zip sometimes failes to unzip all of the data
 If this error occurs, some of the .jsonls will still be gzipped. 
 To fix this, simply run `gunzip` on the remaining files and re-run the preprocess.py.
 
+====================================================================================
+
 Due to file-locks, it is not possible to use a model OR a dataset at two experiments at the same time. 
 If you want to run two experiments at once using the same model, you need to make a copy.
 A short test from me showed that they give the same results when all parameters are equal.
 
+
+====================================================================================
 
 Another issue is from windows, atleast default windows. 
 if you get an error like 
@@ -96,6 +107,9 @@ This is due to windows changing the line-breaks / file encodings. Thanks windows
 **Easy Solution**: run `dos2unix entrypoint.sh` and rebuild the container. 
 Its might easier/faster to pull the image from this repository, or you have to [edit the entrypoint to be compatible with windows](https://askubuntu.com/questions/966488/how-do-i-fix-r-command-not-found-errors-running-bash-scripts-in-wsl). 
 
+
+====================================================================================
+
 ```
 xxx | RuntimeError: CUDA out of memory. Tried to allocate 62.00 MiB (GPU 0; 12.00 GiB total capacity; 10.57 GiB already allocated; 0 bytes free; 10.71 GiB reserved in total by PyTorch)
 ```
@@ -103,3 +117,29 @@ xxx | RuntimeError: CUDA out of memory. Tried to allocate 62.00 MiB (GPU 0; 12.0
 This happens in old Pytorch versions. 
 
 Reduce batch size. To the best of my knowledge, nothing else can be done about this in old pytorch versions.
+
+====================================================================================
+
+Another thing that can happen is that the container stops after printing "starting epoch" like such: 
+
+```
+[...]
+python-codebert-training_1  | 03/17/2022 08:00:18 - INFO - __main__ -   ***** Running training *****
+python-codebert-training_1  | 03/17/2022 08:00:18 - INFO - __main__ -     Num examples = 164923
+python-codebert-training_1  | 03/17/2022 08:00:18 - INFO - __main__ -     Batch size = 8
+python-codebert-training_1  | 03/17/2022 08:00:18 - INFO - __main__ -     Num epoch = 10
+[Nothing here but you are waiting for it quite long already]
+```
+
+This can be expected, as here the logging / printing halts until evaluation. 
+However, it can also be blocked by some pytorch logic. 
+This happened on our servers where we had multiple GPUs, that were all mounted in the docker-compose. 
+You can narrow down whether this is your problem by 
+
+1. Checking Nvidia SMI, showing *n* python processes (where n is the numer of your GPUs)
+2. All related python processes have a low memory use
+3. the general load on the GPUs is low 
+4. the time that you see the above message is suspiciously different from the numbers reported above
+
+To adress this, just mount **one** GPU in. 
+Only one GPU should be picked up, printed as such at the beginning of the container logs. 
