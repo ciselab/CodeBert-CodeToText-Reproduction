@@ -6,17 +6,17 @@ services:
     volumes:
       - ./dataset/java/:/dataset:ro
       - ./compose_output:/experiment/output
-      - ./models/java:/models
+      - ./compose_output/checkpoint-best-bleu:/models
     environment:
-      do_train: "false"
-      do_val: "true"
-      do_test: "true"
+      DO_TRAIN: "false"
+      DO_VALID: "true"
+      DO_TEST: "true"
       valid_file: /dataset/valid_minimal.jsonl
       test_file: /dataset/test_minimal.jsonl
       no_cuda: "true"
       pretrained_model: microsoft/codebert-base
       load_existing_model: "true"
-      load_model_path: /models/best_pytorch_model.bin
+      load_model_path: /models/pytorch_model.bin
     deploy:
       resources:
         reservations:

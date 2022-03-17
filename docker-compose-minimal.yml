@@ -3,6 +3,8 @@ version: '3.8'
 services:
   experiment:
     image: ciselab/codebert-code2text
+    build:
+      context: .
     volumes:
       - ./dataset/java/:/dataset:ro
       - ./compose_output:/experiment/output
