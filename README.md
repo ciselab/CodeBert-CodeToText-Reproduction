@@ -42,19 +42,19 @@ docker-compose -f docker-compose-minimal.yml up
 
 
 When shutting down the process before completion, make sure to **clean up your containers** ! 
-Otherwise, using docker run it might just restart the stopped container. 
+Otherwise, using `docker run` it might just restart the stopped container. 
 
 Also, if you run the experiment multiple times, **extract the outputs** beforehand. 
 Otherwise, the output will be overwritten. 
 
-I have also tested this to work with podman and podman-compose on debian 10. 
+Version 1.2 was also tested to work with podman and podman-compose on debian 10. 
 For running with podman, make sure to have the output folder created first.
 
 ## Requirements / Non Docker 
 
-In older versions (1.0) this contained an `environment.yml` and instructions how to run this without docker on your own machine. 
-In theory, this is still possible, but the requirements is (intentionally) reduced to work flawless with the pre-existing dependencies in the container.
-To work, you should be good starting from Python 3.6 and installing Pytorch 1.4. 
+The contained `environment.yml` is a starting point how to run this *without docker* on your own machine. 
+The provided `requirements.txt` is meant for docker-only as important parts (pytorch) are missing, to align with pre-existing dependencies in the container.
+To work, you should be good starting from Python 3.6 and make a fresh conda env from the `environment.yml`. 
 
 ## Licence 
 
@@ -67,11 +67,11 @@ The original python files from microsoft follow (different) licences, and any ch
 
 For the container to run properly, it needs 15 to 25 gigabyte memory. 
 On our servers, one cpu epoch on the java data takes ~30h. 
-The Containers starts ~20 threads for training and your server should have >20 cores.  
+The CPU Containers starts ~20 threads for training and your server should have >20 cores.  
 
 In comparison, training on a RTX 1070 took 7h per epoch. 
 Training on a 3080ti took 6h per epoch. 
-Training on an A40 took ~3h per epoch. In general, GPU tries to allocate around 12gb of memory. 
+Training on an A40 took ~4h per epoch. In general, GPU tries to allocate around 12gb of memory. 
 
 In general, despite being a good first step, GPU Containers turned out to be quite fragile. 
 We have seen multiple problems with Framework-Versions, Hardware and OS combinations. 
@@ -143,3 +143,10 @@ You can narrow down whether this is your problem by
 
 To adress this, just mount **one** GPU in. 
 Only one GPU should be picked up, printed as such at the beginning of the container logs. 
+
+## Version History 
+
+- 1.0 was the first version with everything hardcoded
+- 1.1 had some elements hardcoded, others configurable
+- 1.2 was fully configurable but hardcoded to **CPU only**
+- 1.3 changed the base image and allows **GPU usage**
