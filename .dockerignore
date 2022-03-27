@@ -5,3 +5,8 @@ dataset
 model
 Dockerfile
 models
+models
+compose_output
+saved_*
+.github
+dataset.zip
