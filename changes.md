@@ -13,7 +13,7 @@ this file holds the changes applied to the existing project from CodeXGlue
 ---------
 
 
-- Moved to Cuda Container, removed conda environment.yml in favour of pip requirements.txt
+- Moved to Cuda Container, removed conda environment.yml in Docker in favour of pip requirements.txt
 - Added a lot of known problems
 - Updated Code to match CodeXGlue Repository (has been changed since initial checkout)
 - Updated Composes to only use one GPU default

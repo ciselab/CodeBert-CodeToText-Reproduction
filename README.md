@@ -24,8 +24,6 @@ You can build the docker file beforehand using
 docker build . -t ciselab/codebert-code2text:1.3 -t ciselab/codebert-code2text:latest
 ```
 
-Or you can comment-in the build parts in the docker-compose.yml
-
 Run the experiment using 
 
 ```
@@ -71,7 +69,7 @@ The CPU Containers starts ~20 threads for training and your server should have >
 
 In comparison, training on a RTX 1070 took 7h per epoch. 
 Training on a 3080ti took 6h per epoch. 
-Training on an A40 took ~4h per epoch. In general, GPU tries to allocate around 12gb of memory. 
+Training on an A40 took ~4h per epoch. In general, the GPU tries to allocate around 12gb of memory. 
 
 In general, despite being a good first step, GPU Containers turned out to be quite fragile. 
 We have seen multiple problems with Framework-Versions, Hardware and OS combinations. 

@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  experiment:
+  codebert_java_training:
     image: ciselab/codebert-code2text
     volumes:
       - ./dataset/java/:/dataset:ro
-      - ./compose_output:/experiment/output
+      - ./java_compose_output:/experiment/output
     environment:
       epochs: 10
       train_file: /dataset/train.jsonl

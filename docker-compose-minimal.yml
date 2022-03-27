@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  experiment:
+  codebert_minimal_example:
     image: ciselab/codebert-code2text
     build:
       context: .

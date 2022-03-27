@@ -1,6 +1,6 @@
 FROM nvcr.io/nvidia/pytorch:20.01-py3
 
-LABEL maintainer="L.H.Applis@tu-delft.nl"
+LABEL maintainer="L.H.Applis@tudelft.nl"
 LABEL name="ciselab/codebert-code2text"
 LABEL url="https://github.com/ciselab/CodeBert-CodeToText-Reproduction"
 LABEL vcs="https://github.com/ciselab/CodeBert-CodeToText-Reproduction"
