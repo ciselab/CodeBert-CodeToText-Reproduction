@@ -1,18 +1,9 @@
-name: ci
+
+name: Publish Docker image
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
-  push:
-    branches:
-      - 'main'
-      - 'master'
-    tags: 
-        - 'v*'
-  pull_request:
-    branches:
-      - 'main'
-      - 'master'
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -55,7 +46,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: false
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   
