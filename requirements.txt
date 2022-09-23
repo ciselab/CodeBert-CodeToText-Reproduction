@@ -2,7 +2,7 @@ filelock==3.0.12
 joblib==0.17.0
 numpy==1.19.3
 packaging==20.4
-protobuf==3.14.0
+protobuf==3.18.3
 pyparsing==2.4.7
 regex==2020.11.13
 sacremoses==0.0.43
